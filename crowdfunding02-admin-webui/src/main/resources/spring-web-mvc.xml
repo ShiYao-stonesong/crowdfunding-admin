@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="com.pyc.crowd.mvc"/>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- 前缀：附加到逻辑视图名称前 -->
+        <property name="prefix" value="/WEB-INF/"/>
+        <!-- 后缀：附加到逻辑视图名称后 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+
+    <!--配置基于XML的异常映射-->
+    <bean id="simpleMappingExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <!--key指定异常全类名-->
+                <!--标签体内写对应的视图（这个值要）-->
+                <prop key="java.lang.Exception">system-error</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--
+    @RequestMapping("/xxx/xxx.html")
+    public String xxx(){
+        return "target";
+    }
+    -->
+    <mvc:view-controller path="/xxx/xxx.html" view-name="target"/>
+
+
+</beans>

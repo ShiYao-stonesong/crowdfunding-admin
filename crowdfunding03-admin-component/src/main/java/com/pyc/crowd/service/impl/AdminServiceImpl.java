@@ -1,10 +1,13 @@
 package com.pyc.crowd.service.impl;
 
 import com.pyc.crowd.entity.Admin;
+import com.pyc.crowd.entity.AdminExample;
 import com.pyc.crowd.mapper.AdminMapper;
 import com.pyc.crowd.service.api.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author 彭远春
@@ -17,5 +20,9 @@ public class AdminServiceImpl implements AdminService {
 
     public void saveAdmin(Admin admin) {
         adminMapper.insert(admin);
+    }
+
+    public List<Admin> getAll() {
+        return adminMapper.selectByExample(new AdminExample());
     }
 }
