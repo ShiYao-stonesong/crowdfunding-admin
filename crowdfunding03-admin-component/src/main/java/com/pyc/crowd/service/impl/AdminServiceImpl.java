@@ -1,5 +1,7 @@
 package com.pyc.crowd.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.pyc.crowd.constant.CrowdConstant;
 import com.pyc.crowd.entity.Admin;
 import com.pyc.crowd.entity.AdminExample;
@@ -50,5 +52,13 @@ public class AdminServiceImpl implements AdminService {
         }
 
         return admin;
+    }
+
+    public PageInfo<Admin> getPageInfo(String keyword, Integer pageNum, Integer pageSize) {
+        // 1.调用PageHelper的静态方法开启分页功能
+        PageHelper.startPage(pageNum,pageSize);
+        List<Admin> list = adminMapper.selectAdminByKeyword(keyword);
+
+        return new PageInfo<Admin>(list);
     }
 }
